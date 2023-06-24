@@ -5,12 +5,13 @@ const PORT = 3001 || process.env.PORT
 const {v4: uuidv4} = require('uuid')
 
 const app = express();
+//set up all starter variables above here
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
-//re study above lines
+//re examine above lines
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'))
@@ -34,6 +35,7 @@ let createdNote = {
 fs.readFile('db/db.json', 'utf-8', (err, data) => {
   let savedNotes = JSON.parse(data)
   savedNotes.push(createdNote)
+  //write the file here
   fs.writeFile('db/db.json', JSON.stringify(savedNotes), (err) =>{
     err ? console.log('Error', err) : console.log('Success,' + createdNote.title + 'has been saved!')
     console.log("createdNote", createdNote)
